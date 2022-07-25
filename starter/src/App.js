@@ -1,17 +1,28 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddButton } from "./components/AddButton";
 import { SearchInput } from "./components/SearchInput";
 import { Header } from "./components/Header";
-import { ShelfChangerButton } from "./components/ShelfChangerButton";
 import { Book } from "./components/Book";
+import { getAll } from "./BooksAPI";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
+  const [booksData, setBooksData] = useState([]);
   const handleClick = () => {
     console.log("Add button clicked from app file");
     setShowSearchpage(!showSearchPage);
   };
+  // let [dogImage, setDogImage] = useState(null);
+
+  // 3. Create out useEffect function
+  useEffect(() => {
+    getAll()
+      // 4. Setting *dogImage* to the image url that we received from the response above
+      .then((data) => {
+        setBooksData(data);
+      });
+  }, []);
 
   return (
     <div className="app">
@@ -26,6 +37,23 @@ function App() {
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
+                    {console.log(
+                      "books data",
+                      booksData.filter((book) => book.shelf == "read")
+                    )}
+                    {booksData
+                      .filter((book) => book.shelf === "currenlyReadings")
+                      .map((book) => {
+                        return (
+                          <li>
+                            <Book
+                              author={book.author}
+                              title={book.title}
+                              imageUrl={book.imageLinks.thumbnail}
+                            />
+                          </li>
+                        );
+                      })}
                     <li>
                       <Book
                         title={"dodo"}
