@@ -175,3 +175,7 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+/*Add button styling*/
+a{
+  cursor: pointer;
+}

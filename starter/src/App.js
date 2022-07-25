@@ -1,31 +1,17 @@
 import "./App.css";
 import { useState } from "react";
+import {AddButton} from "./components/AddButton"
+import {SearchInput} from "./components/SearchInput"
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
+  const handleClick = ()=>{ console.log('Add button clicked from app file');
+  setShowSearchpage(!showSearchPage) };
 
   return (
     <div className="app">
       {showSearchPage ? (
-        <div className="search-books">
-          <div className="search-books-bar">
-            <a
-              className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
-            >
-              Close
-            </a>
-            <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title, author, or ISBN"
-              />
-            </div>
-          </div>
-          <div className="search-books-results">
-            <ol className="books-grid"></ol>
-          </div>
-        </div>
+        <SearchInput navigate={() => setShowSearchpage(!showSearchPage)}/>
       ) : (
         <div className="list-books">
           <div className="list-books-title">
@@ -272,9 +258,10 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="open-search">
+          {/* <div className="open-search">
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
-          </div>
+          </div> */}
+          <AddButton navigate={()=> handleClick()}/>
         </div>
       )}
     </div>
