@@ -14,9 +14,6 @@ export const Book = ({
   const [selectedShelf, setSelectedShelf] = useState(shelfAssigned);
 
   const bookShelf = (shelf) => {
-    // getAll().then((data) => {
-    //   setBooksData(data);
-    // });
     update(booksData.filter((book) => book.id === id)[0], shelf).then(() => {
       setSelectedShelf(shelf);
       setData(
