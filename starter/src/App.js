@@ -18,11 +18,9 @@ function App() {
 
   // 3. Create out useEffect function
   useEffect(() => {
-    getAll()
-      // 4. Setting *dogImage* to the image url that we received from the response above
-      .then((data) => {
-        setBooksData(data);
-      });
+    getAll().then((data) => {
+      setBooksData(data);
+    });
   }, []);
 
   return (
@@ -43,18 +41,14 @@ function App() {
                       booksData
                         .filter((book) => book.shelf === "currentlyReading")
                         .map((book) => {
-                          console.log(
-                            "book:",
-                            book.title,
-                            book.authors[0],
-                            book.imageLinks.thumbnail
-                          );
                           return (
-                            <li>
+                            <li key={book.id}>
                               <Book
                                 author={book.authors[0]}
                                 title={book.title}
                                 imageUrl={book.imageLinks.thumbnail}
+                                id={book.id}
+                                shelfAssigned={book.shelf}
                               />
                             </li>
                           );
@@ -71,18 +65,13 @@ function App() {
                       booksData
                         .filter((book) => book.shelf === "wantToRead")
                         .map((book) => {
-                          console.log(
-                            "book:",
-                            book.title,
-                            book.authors[0],
-                            book.imageLinks.thumbnail
-                          );
                           return (
-                            <li>
+                            <li key={book.id}>
                               <Book
                                 author={book.authors[0]}
                                 title={book.title}
                                 imageUrl={book.imageLinks.thumbnail}
+                                shelfAssigned={book.shelf}
                               />
                             </li>
                           );
@@ -99,18 +88,13 @@ function App() {
                       booksData
                         .filter((book) => book.shelf === "read")
                         .map((book) => {
-                          console.log(
-                            "book:",
-                            book.title,
-                            book.authors[0],
-                            book.imageLinks.thumbnail
-                          );
                           return (
-                            <li>
+                            <li key={book.id}>
                               <Book
                                 author={book.authors[0]}
                                 title={book.title}
                                 imageUrl={book.imageLinks.thumbnail}
+                                shelfAssigned={book.shelf}
                               />
                             </li>
                           );
