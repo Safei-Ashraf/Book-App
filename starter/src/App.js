@@ -14,19 +14,14 @@ function App() {
     setShowSearchpage(!showSearchPage);
   };
 
-  // let [dogImage, setDogImage] = useState(null);
-
-  // 3. Create out useEffect function
   useEffect(() => {
     getAll().then((data) => {
       setBooksData(data);
     });
   }, []);
-  console.log("book data from outside", booksData);
 
   return (
     <div className="app">
-      {console.log("book data from return", booksData)}
       {showSearchPage ? (
         <SearchInput navigate={() => setShowSearchpage(!showSearchPage)} />
       ) : (
@@ -114,9 +109,6 @@ function App() {
               </div>
             </div>
           </div>
-          {/* <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
-          </div> */}
           <AddButton navigate={() => handleClick()} />
         </div>
       )}

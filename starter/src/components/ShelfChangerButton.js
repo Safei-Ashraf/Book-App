@@ -4,7 +4,6 @@ export const ShelfChangerButton = ({ bookShelf, currentShelf, bookId }) => {
       <select
         onChange={(e) => {
           bookShelf(e.target.value);
-          console.log(bookId);
         }}
         value={currentShelf}
       >
