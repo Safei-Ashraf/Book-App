@@ -8,20 +8,21 @@ body {
 }
 body,
 .app {
-  background: white;
+  background-color: rgb(3, 24, 71);
+  color: #666;
 }
 
 /* main page */
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: black;
   text-align: center;
 }
 .list-books-title h1 {
   font-weight: 400;
   margin: 0;
-  color: white;
+  color: #6e6e6e;
 }
 
 .list-books-content {
@@ -40,7 +41,7 @@ body,
 }
 
 .bookshelf-title {
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #999;
 }
 .bookshelf-books {
   text-align: center;
@@ -176,6 +177,6 @@ body,
   font-size: 0.8em;
 }
 /*Add button styling*/
-a{
+a {
   cursor: pointer;
 }
