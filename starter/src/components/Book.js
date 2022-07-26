@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ShelfChangerButton } from "./ShelfChangerButton";
-import { update } from "../BooksAPI";
 
 export const Book = ({
   title,
@@ -10,24 +9,14 @@ export const Book = ({
   id,
   setData,
   booksData,
+  onUpdate,
 }) => {
   const [selectedShelf, setSelectedShelf] = useState(shelfAssigned);
+  console.log("books data15:", booksData);
 
   const bookShelf = (shelf) => {
-    update(booksData.filter((book) => book.id === id)[0], shelf).then(() => {
-      setSelectedShelf(shelf);
-      setData(
-        booksData.map((book) => {
-          if (book.id === id) {
-            return {
-              ...book,
-              shelf,
-            };
-          }
-          return book;
-        })
-      );
-    });
+    onUpdate(shelf, id);
+    setSelectedShelf(shelf);
   };
 
   return (

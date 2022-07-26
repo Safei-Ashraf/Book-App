@@ -3,14 +3,30 @@ import { Link } from "react-router-dom";
 import { search } from "../BooksAPI";
 import { Book } from "./Book";
 
-export const SearchInput = ({ to }) => {
+export const SearchInput = ({ to, setBooksData, booksData }) => {
   const [searchResults, setSearchResults] = useState([]);
 
   const onChange = (e) => {
     search(e.target.value).then((data) => {
-      console.log(data);
       setSearchResults(data);
     });
+  };
+  const updateBook = (shelf, id) => {
+    const filteredBook = searchResults.filter((book) => book.id === id);
+    !booksData.find(filteredBook) &&
+      setBooksData([...booksData, { ...filteredBook, shelf }]);
+    booksData.find(filteredBook) &&
+      setBooksData(
+        booksData.map((book) => {
+          if (book.id === id) {
+            return {
+              ...book,
+              shelf,
+            };
+          }
+          return book;
+        })
+      );
   };
 
   return (
@@ -46,8 +62,9 @@ export const SearchInput = ({ to }) => {
                       author={book.authors[0]}
                       title={book.title}
                       imageUrl={book.imageLinks.thumbnail}
-                      id={book.id}
                       shelfAssigned={book.shelf}
+                      id={book.id}
+                      onUpdate={updateBook}
                     />
                   </li>
                 );
