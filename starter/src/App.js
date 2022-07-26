@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { AddButton } from "./components/AddButton";
 import { SearchInput } from "./components/SearchInput";
 import { Header } from "./components/Header";
@@ -22,9 +22,11 @@ function App() {
       setBooksData(data);
     });
   }, []);
+  console.log("book data from outside", booksData);
 
   return (
     <div className="app">
+      {console.log("book data from return", booksData)}
       {showSearchPage ? (
         <SearchInput navigate={() => setShowSearchpage(!showSearchPage)} />
       ) : (
@@ -42,13 +44,15 @@ function App() {
                         .filter((book) => book.shelf === "currentlyReading")
                         .map((book) => {
                           return (
-                            <li key={book.id}>
+                            <li key={book.id} className={book.id}>
                               <Book
                                 author={book.authors[0]}
                                 title={book.title}
                                 imageUrl={book.imageLinks.thumbnail}
                                 id={book.id}
                                 shelfAssigned={book.shelf}
+                                setData={setBooksData}
+                                booksData={booksData}
                               />
                             </li>
                           );
@@ -72,6 +76,9 @@ function App() {
                                 title={book.title}
                                 imageUrl={book.imageLinks.thumbnail}
                                 shelfAssigned={book.shelf}
+                                setData={setBooksData}
+                                booksData={booksData}
+                                id={book.id}
                               />
                             </li>
                           );
@@ -95,6 +102,9 @@ function App() {
                                 title={book.title}
                                 imageUrl={book.imageLinks.thumbnail}
                                 shelfAssigned={book.shelf}
+                                setData={setBooksData}
+                                booksData={booksData}
+                                id={book.id}
                               />
                             </li>
                           );

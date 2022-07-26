@@ -1,11 +1,36 @@
 import { useState } from "react";
 import { ShelfChangerButton } from "./ShelfChangerButton";
-export const Book = ({ title, author, imageUrl, shelfAssigned, id }) => {
+import { update } from "../BooksAPI";
+
+export const Book = ({
+  title,
+  author,
+  imageUrl,
+  shelfAssigned,
+  id,
+  setData,
+  booksData,
+}) => {
   const [selectedShelf, setSelectedShelf] = useState(shelfAssigned);
+
   const bookShelf = (shelf) => {
-    shelfAssigned !== shelf &&
-      setSelectedShelf((selectedShelf) => (selectedShelf = shelf));
-    console.log("shelf", shelfAssigned, "id", id);
+    // getAll().then((data) => {
+    //   setBooksData(data);
+    // });
+    update(booksData.filter((book) => book.id === id)[0], shelf).then(() => {
+      setSelectedShelf(shelf);
+      setData(
+        booksData.map((book) => {
+          if (book.id === id) {
+            return {
+              ...book,
+              shelf,
+            };
+          }
+          return book;
+        })
+      );
+    });
   };
 
   return (
@@ -19,11 +44,15 @@ export const Book = ({ title, author, imageUrl, shelfAssigned, id }) => {
             backgroundImage: `url("${imageUrl}")`,
           }}
         ></div>
-        <ShelfChangerButton bookShelf={bookShelf} />
+        <ShelfChangerButton
+          bookShelf={bookShelf}
+          currentShelf={selectedShelf}
+          bookId={id}
+        />
       </div>
       <div className="book-title">{title}</div>
       <div className="book-authors">{author}</div>
-      {console.log("shelf now", selectedShelf)}
+      {/* {console.log("shelf now", selectedShelf)} */}
     </div>
   );
 };

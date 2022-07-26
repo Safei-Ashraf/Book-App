@@ -1,13 +1,12 @@
-import { useState } from "react";
-export const ShelfChangerButton = ({ bookShelf }) => {
-  const [selectedShelf, setSelected] = useState("");
+export const ShelfChangerButton = ({ bookShelf, currentShelf, bookId }) => {
   return (
     <div className="book-shelf-changer">
       <select
         onChange={(e) => {
-          setSelected({ selectedShelf: e.target.value });
-          bookShelf(selectedShelf);
+          bookShelf(e.target.value);
+          console.log(bookId);
         }}
+        value={currentShelf}
       >
         <option value="none" disabled>
           Move to...
