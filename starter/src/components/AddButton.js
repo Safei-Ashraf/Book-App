@@ -1,6 +1,11 @@
-export const AddButton = ({navigate})=>{
+import { Link } from "react-router-dom";
 
-return(<div className="open-search">
-    <a onClick={navigate}>Add a book</a>
-  </div>)
-}
+export const AddButton = ({ navigate, to }) => {
+  return (
+    <div className="open-search">
+      <Link to={to} onClick={navigate}>
+        Add a book
+      </Link>
+    </div>
+  );
+};
