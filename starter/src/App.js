@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AddButton } from "./components/AddButton";
 import { SearchInput } from "./components/SearchInput";
 import { Header } from "./components/Header";
