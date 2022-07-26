@@ -1,18 +1,12 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { AddButton } from "./components/AddButton";
-// import { SearchInput } from "./components/SearchInput";
 import { Header } from "./components/Header";
 import { Book } from "./components/Book";
 import { getAll } from "./BooksAPI";
 
 function App() {
-  // const [showSearchPage, setShowSearchpage] = useState(false);
   const [booksData, setBooksData] = useState([]);
-  const handleClick = () => {
-    console.log("Add button clicked from app filez");
-    // setShowSearchpage(!showSearchPage);
-  };
 
   useEffect(() => {
     getAll().then((data) => {
@@ -22,12 +16,6 @@ function App() {
 
   return (
     <div className="app">
-      {/* {showSearchPage ? ( */}
-      {/* <SearchInput
-        navigate={() => setShowSearchpage(!showSearchPage)}
-        to={"/"}
-      /> */}
-      {/* ) : ( */}
       <div className="list-books">
         <Header headerText={"My Reads App"} />
         <div className="list-books-content">
@@ -112,9 +100,8 @@ function App() {
             </div>
           </div>
         </div>
-        <AddButton navigate={() => handleClick()} to={"/search"} />
+        <AddButton to={"/search"} />
       </div>
-      {/* )} */}
     </div>
   );
 }

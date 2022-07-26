@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 
-export const AddButton = ({ navigate, to }) => {
+export const AddButton = ({ to }) => {
   return (
     <div className="open-search">
-      <Link to={to} onClick={navigate}>
-        Add a book
-      </Link>
+      <Link to={to}>Add a book</Link>
     </div>
   );
 };
