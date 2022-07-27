@@ -48,29 +48,18 @@ function App() {
       {/* //{console.log("booksData in app", booksData)} */}
       <Routes>
         <Route
-          path="*"
+          path="/"
           element={<HomePage booksData={booksData} updateShelf={updateShelf} />}
         />
+        <Route path="/search" element={<SearchPage />} />
         <Route
-          path="/search"
-          element={
-            <SearchPage
-            // to={"/"}
-            // searchTerm={searchTerm}
-            // handleSearch={handleSearch}
-            // updateShelf={updateShelf}
-            // books={searchBooksResult}
-            />
-          }
-        />
-        {/* <Route
           path="*"
           element={
             <main style={{ padding: "1rem" }}>
               <p>There's nothing here!</p>
             </main>
           }
-        /> */}
+        />
       </Routes>
     </div>
   );

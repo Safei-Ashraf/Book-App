@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { search, getAll, update } from "../BooksAPI";
 import { Book } from "./Book";
 
-export const SearchPage = ({}) => {
+export const SearchPage = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -19,6 +19,10 @@ export const SearchPage = ({}) => {
   };
 
   const loadSearchData = async (searchTerm) => {
+    //1-fetch search books list
+    //2-fetch books data from homepage
+    //3- compare both lists
+    //4- if one book match on the other list, replace it with data on homepage book data, there is a slight delay
     await search(searchTerm).then((searchData) => {
       getAll().then((pureBooksData) => {
         const finalData = searchData.map((item) => {
@@ -32,12 +36,6 @@ export const SearchPage = ({}) => {
         });
         setBooks(finalData);
       });
-      //setBooks(data);
-      // console.log("api", data);
-      //1-fetch search books list
-      //2-fetch books data from homepage
-      //3- compare both lists
-      //4- if one book match on the other list, replace it with data on homepage book data
     });
   };
 
