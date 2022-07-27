@@ -1,22 +1,6 @@
-import { useState } from "react";
-import { ShelfChangerButton } from "./ShelfChangerButton";
-
-export const Book = ({
-  title,
-  author,
-  imageUrl,
-  shelfAssigned,
-  id,
-  setData,
-  booksData,
-  onUpdate,
-}) => {
-  const [selectedShelf, setSelectedShelf] = useState(shelfAssigned);
-  console.log("books data15:", booksData);
-
-  const bookShelf = (shelf) => {
-    onUpdate(shelf, id);
-    setSelectedShelf(shelf);
+export const Book = ({ title, authors, imageUrl, updateShelf, book }) => {
+  const changeShelf = (e) => {
+    updateShelf(book, e.target.value);
   };
 
   return (
@@ -30,15 +14,28 @@ export const Book = ({
             backgroundImage: `url("${imageUrl}")`,
           }}
         ></div>
-        <ShelfChangerButton
-          bookShelf={bookShelf}
-          currentShelf={selectedShelf}
-          bookId={id}
-        />
+        <div className="book-shelf-changer">
+          <select
+            onChange={changeShelf}
+            // if the book does not have an assigned shelf, it should be marked as none
+            value={book.shelf ? book.shelf : "none"}
+          >
+            <option value="none" disabled>
+              Move to...
+            </option>
+            <option value="currentlyReading">Currently Reading</option>
+            <option value="wantToRead">Want to Read</option>
+            <option value="read">Read</option>
+            <option value="none">None</option>
+          </select>
+        </div>
       </div>
       <div className="book-title">{title}</div>
-      <div className="book-authors">{author}</div>
-      {/* {console.log("shelf now", selectedShelf)} */}
+      <div className="book-authors">
+        {authors.map((author) => (
+          <div>{author}</div>
+        ))}
+      </div>
     </div>
   );
 };
