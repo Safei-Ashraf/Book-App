@@ -1,12 +1,15 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { getAll, update } from "./BooksAPI";
+import { getAll, search, update } from "./BooksAPI";
 import { HomePage } from "./components/HomePage";
-import { SearchInput } from "./components/SearchInput";
+import { SearchPage } from "./components/SearchPage";
 
 function App() {
   const [booksData, setBooksData] = useState([]);
+  const [searchBooksResult, setSearchBooksResult] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   //basic book data fetching
   useEffect(() => {
     getAll().then((data) => {
@@ -21,6 +24,25 @@ function App() {
     });
   };
 
+  //search:ogic:
+  const handleSearch = (term = "react") => {
+    console.log("search Term", term);
+    setSearchTerm(term);
+    loadSearchData(term);
+  };
+
+  const loadSearchData = async (searchTerm = "react") => {
+    await search(searchTerm).then((data) => {
+      setSearchBooksResult(data);
+    });
+  };
+  console.log(
+    "load search data props",
+    searchTerm,
+    handleSearch,
+    updateShelf,
+    searchBooksResult
+  );
   return (
     <div className="app">
       {/* //{console.log("booksData in app", booksData)} */}
@@ -32,10 +54,12 @@ function App() {
         <Route
           path="/search"
           element={
-            <SearchInput
-              to={"/"}
-              setBooksData={setBooksData}
-              booksData={booksData}
+            <SearchPage
+            // to={"/"}
+            // searchTerm={searchTerm}
+            // handleSearch={handleSearch}
+            // updateShelf={updateShelf}
+            // books={searchBooksResult}
             />
           }
         />
