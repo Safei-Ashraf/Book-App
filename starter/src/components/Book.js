@@ -33,7 +33,7 @@ export const Book = ({ title, authors, imageUrl, updateShelf, book }) => {
       <div className="book-title">{title}</div>
       <div className="book-authors">
         {authors.map((author) => (
-          <div>{author}</div>
+          <div key={author}>{author}</div>
         ))}
       </div>
     </div>
