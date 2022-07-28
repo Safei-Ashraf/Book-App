@@ -18,7 +18,7 @@ export const Book = ({ title, authors, imageUrl, updateShelf, book }) => {
           <select
             onChange={changeShelf}
             // if the book does not have an assigned shelf, it should be marked as none
-            value={book.shelf ? book.shelf : "none"}
+            value={book.shelf ? book.shelf : "nothing"}
           >
             <option value="none" disabled>
               Move to...
@@ -26,7 +26,7 @@ export const Book = ({ title, authors, imageUrl, updateShelf, book }) => {
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
             <option value="read">Read</option>
-            <option value="none">None</option>
+            <option value="nothing">None</option>
           </select>
         </div>
       </div>
