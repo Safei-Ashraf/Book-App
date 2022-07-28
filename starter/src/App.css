@@ -180,3 +180,8 @@ body,
 a {
   cursor: pointer;
 }
+.error-search {
+  text-align: center;
+  font-size: 2rem;
+  color: red;
+}

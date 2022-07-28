@@ -16,6 +16,17 @@ Use `yarn start` to start your application at port `3080`, might ask for port ch
 
 ## How to Use: 
 
+>   Navigate to the home page at "/" ( project should be open there in browser by default)
+>   You can view a list of 3 shelfes representing your books's reading status
+>   you can change a book Shelf/state by clicking the green drop down button and select the new shelf.
+>   book should move to the new assigned shelf (if any) 
+>   if you seleceted "none" the book should leave the screen
+
+>   Navigate to the search page by clicking the "+" green button on your bottom-right side of the screen
+>   you can type a search term e.g: "react" and then you will see all the related books.
+>   you can add a book from there to your reading shelves just by updating it via the dropdown menu (same as before)
+>   if you click the same book again on the search page after adding it, you will notice it already updated the selected shelf.
+
 ## Files Structur
 
 ```bash
