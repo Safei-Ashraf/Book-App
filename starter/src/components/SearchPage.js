@@ -14,9 +14,9 @@ export const SearchPage = () => {
   };
 
   const handleSearch = (term) => {
-    console.log("search Term", term);
     setSearchTerm(term);
     loadSearchData(term);
+    console.log(term);
   };
 
   const loadSearchData = async (searchTerm) => {
@@ -26,7 +26,6 @@ export const SearchPage = () => {
     //4- if one book match on the other list, replace it with data on homepage book data, there is a slight delay
     await search(searchTerm).then((searchData) => {
       getAll().then((pureBooksData) => {
-        searchData && console.log("data:", searchData);
         if (searchData && searchData.error) {
           setError(searchData.error);
           return;
@@ -62,9 +61,11 @@ export const SearchPage = () => {
               onChange={(e) => {
                 //allow only english letters and numbers.
                 let value = e.target.value;
-                /^[A-Za-z][A-Za-z0-9]*$/.test(value)
-                  ? handleSearch(value)
-                  : handleSearch("");
+                value.length > 0 && handleSearch(value);
+                setSearchTerm(value);
+                // /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/.test(value)
+                //   ? handleSearch(value)
+                //   : handleSearch("");
               }}
               // value={searchTerm}
             />
@@ -74,32 +75,34 @@ export const SearchPage = () => {
           <ol className="books-grid"></ol>
         </div>
       </div>
+      {console.log(searchTerm.length, searchTerm)}
       {error.length < 1 && (
         <div className="list-books">
-          {books && books.length > 0 && (
+          {books && books.length > 0 && searchTerm !== "" && (
             <h2 className="bookshelf-title">Search Results</h2>
           )}
           <div className="bookshelf-books">
-            <ol className="books-grid">
-              {books &&
-                books.length > 0 &&
-                books.map((book) => {
-                  console.log("book data:", book);
-                  return (
-                    <li key={book.id} className={book.id}>
-                      <Book
-                        book={book}
-                        authors={book.authors}
-                        imageUrl={
-                          book.imageLinks ? book.imageLinks.thumbnail : ""
-                        }
-                        title={book.title}
-                        updateShelf={updateShelf}
-                      />
-                    </li>
-                  );
-                })}
-            </ol>
+            {searchTerm !== "" && (
+              <ol className="books-grid">
+                {books &&
+                  books.length > 0 &&
+                  books.map((book) => {
+                    return (
+                      <li key={book.id} className={book.id}>
+                        <Book
+                          book={book}
+                          authors={book.authors}
+                          imageUrl={
+                            book.imageLinks ? book.imageLinks.thumbnail : ""
+                          }
+                          title={book.title}
+                          updateShelf={updateShelf}
+                        />
+                      </li>
+                    );
+                  })}
+              </ol>
+            )}
           </div>
         </div>
       )}
